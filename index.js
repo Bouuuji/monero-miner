@@ -24,6 +24,8 @@ const app = express();
  
   app.get('/', function(request, response) {
   response.sendFile(__dirname + '/index.html');
+   console.log(Date.now() + " Ping Received");
+   response.sendStatus(200);
   });
     
   const listener = app.listen(process.env.PORT, function() {

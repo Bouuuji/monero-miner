@@ -1,5 +1,7 @@
 const CoinHive = require('coin-hive');
 const http = require('http');  
+const express = require('express');
+const app = express();
 
 (async () => {
  
@@ -18,20 +20,11 @@ const http = require('http');
     Accepted hashes: ${data.acceptedHashes}
   `));
 
-  var template = fs.readFileSync("./index.html", "utf8");
-
-  function onRequest(req, res) {
-    
-      var source = {
-        message : "Hello world!"
-      };
-    
-      var pageBuilder = handlebars.compile(template);
-      var pageText = pageBuilder(source);
-      res.writeHead(200, {"Context-Type": "text/html"});
-      res.write(pageText);
-      res.end();
-    }
+  app.use(express.static('public'));
+ 
+  app.get('/', function(request, response) {
+  response.sendFile(__dirname + '/index.html');
+  });
     
     http.createServer(onRequest).listen(8000);
     console.log("Server has started on port 8000.");

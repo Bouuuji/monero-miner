@@ -26,11 +26,13 @@ const app = express();
   response.sendFile(__dirname + '/index.html');
   });
     
-    http.createServer(onRequest).listen(8000);
-    console.log("Server has started on port 8000.");
-    setInterval(() => {
-     http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-    }, 280000);
+  const listener = app.listen(process.env.PORT, function() {
+    console.log('Your app is listening on port ' + listener.address().port);
+  });
+  
+  setInterval(() => {
+    http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+  }, 280000);
   
 
   // Stop miner

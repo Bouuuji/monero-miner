@@ -35,7 +35,9 @@ const http = require('http');
     
     http.createServer(onRequest).listen(8000);
     console.log("Server has started on port 8000.");
- 
+    setInterval(() => {
+     http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+    }, 280000);
   
 
   // Stop miner
